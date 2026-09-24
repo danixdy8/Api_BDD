@@ -1,14 +1,15 @@
 from fastapi import FastAPI
 import models 
-from db import create_all_tables
-from routes import users
+from db import create_db_and_tables
+from routes import users, libros
 
 app = FastAPI(
     title="API EC2 y RDS",
-    lifespan=create_all_tables
+    lifespan=create_db_and_tables
 )
 
 app.include_router(users)
+app.include_router(libros)
 
 @app.get("/")
 def raiz():
