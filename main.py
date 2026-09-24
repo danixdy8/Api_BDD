@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import models 
-from database import create_db_and_tables
+from db import create_db_and_tables
 from routers import usuarios, libros
 
 app = FastAPI(
