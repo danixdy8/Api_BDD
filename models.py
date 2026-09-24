@@ -1,19 +1,13 @@
-from typing import Optional, List
-from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional
+from sqlmodel import SQLModel, Field
 
-class UsuarioBase(SQLModel):
-    nombre: str
-    email: str = Field(unique=True, index=True)
-
-class Usuario(UsuarioBase, table=True):
+class Usuario(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    libros: List["Libro"] = Relationship(back_populates="usuario")
+    nombre: str
+    email: str
 
-class LibroBase(SQLModel):
+class Libro(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
     titulo: str
     autor: str
     usuario_id: Optional[int] = Field(default=None, foreign_key="usuario.id")
-
-class Libro(LibroBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    usuario: Optional[Usuario] = Relationship(back_populates="libros")
