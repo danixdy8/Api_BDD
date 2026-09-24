@@ -1,4 +1,5 @@
 import os
+import os
 from typing import Annotated
 from fastapi import Depends, FastAPI
 from sqlmodel import SQLModel, Session, create_engine
@@ -12,8 +13,8 @@ HOST = os.getenv("DB_HOST")
 PORT = os.getenv("DB_PORT", "5432")
 NAME = os.getenv("DB_NAME")
 
-DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}"
-engine = create_engine(DATABASE_URL, echo=False)
+rds_connection_string = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}"
+engine = create_engine(rds_connection_string, echo=False)
 
 def create_db_and_tables(app: FastAPI):
     SQLModel.metadata.create_all(engine)
