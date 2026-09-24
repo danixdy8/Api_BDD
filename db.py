@@ -13,7 +13,7 @@ HOST = os.getenv("DB_HOST")
 PORT = os.getenv("DB_PORT", "5432")
 NAME = os.getenv("DB_NAME")
 
-rds_connection_string = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}"
+rds_connection_string = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}?sslmode=require"
 engine = create_engine(rds_connection_string, echo=False)
 
 def create_db_and_tables(app: FastAPI):
